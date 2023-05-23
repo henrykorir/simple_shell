@@ -6,19 +6,19 @@
  */
 int print_env(void)
 {
-	int j = 0, i = 0;
+int j = 0, i = 0;
 
-	while (environ[i] != NULL)
-	{
-		j = 0;
-		while (environ[i][j] != '\0')
-		{
-			_putchar(environ[i][j]);
-			j++;
-		}
-		_putchar('\n');
-		i++;
-	}
+while (environ[i] != NULL)
+{
+j = 0;
+while (environ[i][j] != '\0')
+{
+_putchar(environ[i][j]);
+j++;
+}
+_putchar('\n');
+i++;
+}
 
-	return (0);
+return (0);
 }

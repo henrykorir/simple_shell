@@ -7,27 +7,27 @@
  */
 char *_strdup(const char *str)
 {
-	int i, size;
-	char *dup;
+int i, size;
+char *dup;
 
-	if (str == NULL)
-		return (NULL);
+if (str == NULL)
+return (NULL);
 
-	for (i = 0; str[i] != '\0'; i++)
-	{
-	}
-	size = i;
+for (i = 0; str[i] != '\0'; i++)
+{
+}
+size = i;
 
-	dup = malloc(sizeof(char) * (size + 1));
+dup = malloc(sizeof(char) * (size + 1));
 
-	if (dup == NULL)
-		return (NULL);
+if (dup == NULL)
+return (NULL);
 
-	for (i = 0; i < size; i++)
-		dup[i] = str[i];
-	dup[i] = '\0';
+for (i = 0; i < size; i++)
+dup[i] = str[i];
+dup[i] = '\0';
 
-	return (dup);
+return (dup);
 }
 
 /**
@@ -37,12 +37,12 @@ char *_strdup(const char *str)
  */
 int _strlen(char *str)
 {
-	int i;
+int i;
 
-	for (i = 0; str[i] != '\0'; i++)
-	{
-	}
-	return (i);
+for (i = 0; str[i] != '\0'; i++)
+{
+}
+return (i);
 }
 
 /**
@@ -52,27 +52,27 @@ int _strlen(char *str)
  */
 int _atoi(char *s)
 {
-	int sign = 1, i = 0;
-	unsigned int num = 0;
+int sign = 1, i = 0;
+unsigned int num = 0;
 
-	while (s[i])
-	{
-		if (s[i] == '-')
-			sign *= -1;
+while (s[i])
+{
+if (s[i] == '-')
+sign *= -1;
 
-		while (s[i] >= '0' && s[i] <= '9')
-		{
-			num = (num * 10) + (s[i] - '0');
-			i++;
-		}
-		if (num != 0)
-			break;
+while (s[i] >= '0' && s[i] <= '9')
+{
+num = (num * 10) + (s[i] - '0');
+i++;
+}
+if (num != 0)
+break;
 
-		i++;
-	}
+i++;
+}
 
-	num *= sign;
-	return (num);
+num *= sign;
+return (num);
 }
 
 /**
@@ -82,14 +82,14 @@ int _atoi(char *s)
  */
 int _isdigit(int c)
 {
-	if (c >= '0' && c <= '9')
-	{
-		return (1);
-	}
-	else
-	{
-		return (0);
-	}
+if (c >= '0' && c <= '9')
+{
+return (1);
+}
+else
+{
+return (0);
+}
 }
 
 /**
@@ -99,6 +99,6 @@ int _isdigit(int c)
  */
 void manage_signal(int num_signal __attribute__((unused)))
 {
-	_putchar('\n');
-	prompt();
+_putchar('\n');
+prompt();
 }

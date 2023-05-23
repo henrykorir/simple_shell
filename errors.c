@@ -11,27 +11,27 @@
  */
 void print_errors(char **args, char *argv[], int prompt_count, int error_num)
 {
-    int argv_len, args_len;
+int argv_len, args_len;
 
-    args_len = _strlen(args[0]);
-    argv_len = _strlen(argv[0]);
+args_len = _strlen(args[0]);
+argv_len = _strlen(argv[0]);
 
-    if (error_num == 127 || error_num == 126)
-    {
-        write(STDOUT_FILENO, argv[0], argv_len);
-        write(STDOUT_FILENO, " : ", 3);
-        print_integer(prompt_count);
-        write(STDOUT_FILENO, ": ", 2);
-        write(STDOUT_FILENO, args[0], args_len);
-        write(STDOUT_FILENO, ": ", 2);
-        perror("");
-    }
+if (error_num == 127 || error_num == 126)
+{
+write(STDOUT_FILENO, argv[0], argv_len);
+write(STDOUT_FILENO, " : ", 3);
+print_integer(prompt_count);
+write(STDOUT_FILENO, ": ", 2);
+write(STDOUT_FILENO, args[0], args_len);
+write(STDOUT_FILENO, ": ", 2);
+perror("");
+}
 
-    if (error_num == 2)
-    {
-        write(STDOUT_FILENO, argv[0], argv_len);
-        write(STDOUT_FILENO, ": ", 2);
-    }
+if (error_num == 2)
+{
+write(STDOUT_FILENO, argv[0], argv_len);
+write(STDOUT_FILENO, ": ", 2);
+}
 }
 
 /**
@@ -42,9 +42,9 @@ void print_errors(char **args, char *argv[], int prompt_count, int error_num)
  */
 int print_integer(int num)
 {
-    int iterator = 1;
+int iterator = 1;
 
-    return (recursion_int(num, iterator));
+return (recursion_int(num, iterator));
 }
 
 /**
@@ -56,24 +56,24 @@ int print_integer(int num)
  */
 int recursion_int(int num, int count)
 {
-    unsigned int number;
+unsigned int number;
 
-    if (num < 0)
-    {
-        _putchar('-');
-        number = (-1) * num;
-        count++;
-    }
-    else
-        number = num;
+if (num < 0)
+{
+_putchar('-');
+number = (-1) * num;
+count++;
+}
+else
+number = num;
 
-    if (number / 10)
-    {
-        count = recursion_int(number / 10, count = count + 1);
-    }
+if (number / 10)
+{
+count = recursion_int(number / 10, count = count + 1);
+}
 
-    _putchar((number % 10) + '0');
-    return (count);
+_putchar((number % 10) + '0');
+return (count);
 }
 
 /**
@@ -85,5 +85,5 @@ int recursion_int(int num, int count)
  */
 int _putchar(char c)
 {
-    return (write(STDOUT_FILENO, &c, 1));
+return (write(STDOUT_FILENO, &c, 1));
 }

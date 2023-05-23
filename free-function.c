@@ -6,9 +6,9 @@
  */
 void free_arraybid(char **arr)
 {
-    int i;
+int i;
 
-    for (i = 0; arr[i] != NULL; i++)
-        free(arr[i]);
-    free(arr);
+for (i = 0; arr[i] != NULL; i++)
+free(arr[i]);
+free(arr);
 }

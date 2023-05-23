@@ -8,22 +8,22 @@
  */
 int _strcmp(char *str1, char *str2)
 {
-    int i = 0;
-    int result;
+int i = 0;
+int result;
 
-    while (str1[i] != '\0' && str2[i] != '\0')
-    {
-        if (str1[i] == str2[i])
-            result = 0;
-        else
-        {
-            result = (str1[i] - '0') - (str2[i] - '0');
-            return result;
-        }
-        i++;
-    }
+while (str1[i] != '\0' && str2[i] != '\0')
+{
+if (str1[i] == str2[i])
+result = 0;
+else
+{
+result = (str1[i] - '0') - (str2[i] - '0');
+return (result);
+}
+i++;
+}
 
-    return result;
+return (result);
 }
 
 /**
@@ -34,16 +34,16 @@ int _strcmp(char *str1, char *str2)
  */
 char *_strcpy(char *dest, char *src)
 {
-    int length = 0;
-    int i;
+int length = 0;
+int i;
 
-    while (src[length] != '\0')
-        length++;
+while (src[length] != '\0')
+length++;
 
-    for (i = 0; i <= length; i++)
-        dest[i] = src[i];
+for (i = 0; i <= length; i++)
+dest[i] = src[i];
 
-    return dest;
+return (dest);
 }
 
 /**
@@ -54,21 +54,21 @@ char *_strcpy(char *dest, char *src)
  */
 char *_strcat(char *dest, char *src)
 {
-    int i = 0;
-    int j = 0;
+int i = 0;
+int j = 0;
 
-    while (dest[i] != '\0')
-        i++;
+while (dest[i] != '\0')
+i++;
 
-    while (src[j] != '\0')
-    {
-        dest[i] = src[j];
-        i++;
-        j++;
-    }
+while (src[j] != '\0')
+{
+dest[i] = src[j];
+i++;
+j++;
+}
 
-    dest[i] = '\0';
-    return dest;
+dest[i] = '\0';
+return (dest);
 }
 
 /**
@@ -79,25 +79,25 @@ char *_strcat(char *dest, char *src)
  */
 char **sp_string(char *str, char *delimiters)
 {
-    char **tokens;
-    char *token;
-    int i = 0;
+char **tokens;
+char *token;
+int i = 0;
 
-    tokens = (char **)malloc(sizeof(char *) * 1024);
-    if (tokens == NULL)
-    {
-        /* Print error for malloc */
-        return NULL;
-    }
+tokens = (char **)malloc(sizeof(char *) * 1024);
+if (tokens == NULL)
+{
+/* Print error for malloc */
+return (NULL);
+}
 
-    token = strtok(str, delimiters);
-    while (token != NULL)
-    {
-        tokens[i] = token;
-        token = strtok(NULL, delimiters);
-        i++;
-    }
+token = strtok(str, delimiters);
+while (token != NULL)
+{
+tokens[i] = token;
+token = strtok(NULL, delimiters);
+i++;
+}
 
-    tokens[i] = NULL;
-    return tokens;
+tokens[i] = NULL;
+return (tokens);
 }
