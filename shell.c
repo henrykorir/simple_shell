@@ -6,7 +6,6 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <signal.h>
-#include "main.h"
 
 #define TRUE 1
 /**
@@ -121,6 +120,8 @@ char *envp[] __attribute__((unused)))
 				_exit(EXIT_FAILURE);
 			}
 		}
+		if (isatty(STDIN_FILENO) == 0)
+			break;
 	}
 	return (0);
 }
