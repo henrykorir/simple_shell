@@ -119,6 +119,10 @@ int write_history(char *);
 int _write(int, char *, int);
 
 void print_error(char *, int *, char *);
+void print_errors(char **array, char *av[], int cont, int num);
+int print_integer(int n);
+int recursion_int(int n, int cont);
+int _putchar(char c);
 
 extern char **environ;
 
