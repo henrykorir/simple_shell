@@ -1,1 +1,1 @@
-## Repo for the simple shell group project
+Group Project on Simple Shel - 2 Contributors
