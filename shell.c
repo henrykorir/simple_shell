@@ -81,7 +81,7 @@ ssize_t process_command(char *command[])
 	if (line[0] == '"' && line[strlen(line) - 1] == '"')
 	{
 		line[strlen(line) - 1] = '\0';
-		strcpy(line, line[1]);
+		strcpy(line, line + 1);
 	}
 	command[0] = strdup(line);
 
