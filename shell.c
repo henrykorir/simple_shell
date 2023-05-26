@@ -78,6 +78,11 @@ ssize_t process_command(char *command[])
 	if (isatty(STDIN_FILENO) == 1)
 		write(STDOUT_FILENO, prompt, strlen(prompt) + 1);
 	nb_read = _getline(&line, &n, STDIN_FILENO);
+	if (line[0] == '"' && line[strlen(line) - 1] == '"')
+	{
+		line[strlen(line) - 1] = '\0';
+		strcpy(line, line[1]);
+	}
 	command[0] = strdup(line);
 
 	return (nb_read);
@@ -95,30 +100,37 @@ char *argv[] __attribute__((unused)),
 char *envp[] __attribute__((unused)))
 {
 	char *cmds[] = {NULL, NULL};
-	int status;
+	int status, n;
 	pid_t cpid, w;
+	struct stat st;
 
 	while (TRUE)
 	{
 		process_command(cmds);
 		if (cmds[0] != NULL || strlen(cmds[0]) != 0)
 		{
-			cpid = fork();
-			if (cpid != 0)
+			n = stat(cmds[0], &st);
+			if (n == 0)
 			{
-				w = waitpid(cpid, &status, 0);
-				if (w == -1)
+				cpid = fork();
+				if (cpid != 0)
 				{
-					perror("waitpid");
-					exit(EXIT_FAILURE);
+					w = waitpid(cpid, &status, 0);
+					if (w == -1)
+					{
+						perror("waitpid");
+						exit(EXIT_FAILURE);
+					}
+				}
+				else
+				{
+					execve(cmds[0], cmds, envp);
+					perror(argv[0]);
+					_exit(EXIT_FAILURE);
 				}
 			}
 			else
-			{
-				execve(cmds[0], cmds, envp);
 				perror(argv[0]);
-				_exit(EXIT_FAILURE);
-			}
 		}
 		if (isatty(STDIN_FILENO) == 0)
 			break;
