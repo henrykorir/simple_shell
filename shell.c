@@ -10,7 +10,7 @@
 #define TRUE 1
 /**
  * __mem_alloc - tries to allocate requested memory
- * @lineptr: memory pointer
+ * @lineptr: memory pointer to the command line
  * @n: the size of memory requested
  * Return: the true size of the memory successfully allocated
  */
