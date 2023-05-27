@@ -64,17 +64,39 @@ ssize_t _getline(char **lineptr, size_t *n, int fd)
 	return (n_chars);
 }
 /**
- * process_command - reads and parses input
- * @command: commands
- * Return: nothing
+ * parse_commands - creates a 2D array of command line
+ * @line: command line string
+ * @cmds: final 2D array of command and arguments
+ * Return: size of the 2D array.
  */
-ssize_t process_command(char *command[])
+int parse_commands(char *line, char ***cmds)
+{
+	char *token = NULL;
+	int i = 0;
+
+	token = strtok(line, " ");
+	while (token != NULL)
+	{
+		puts(token);
+		*cmds = realloc(*cmds, (i + 2) * sizeof(char *));
+		(*cmds)[i] = strdup(token);
+		token = strtok(NULL, " ");
+		i++;
+	}
+
+	return (i);
+}
+/**
+ * process_command - reads and parses input
+ * @commands: commands
+ * Return: number of commands
+ */
+ssize_t process_command(char ***commands)
 {
 	char *line = NULL, *prompt = "#cisfun$ ";
 	size_t n = 0;
 	ssize_t nb_read = 0;
 
-	command[0] = NULL;
 	if (isatty(STDIN_FILENO) == 1)
 		write(STDOUT_FILENO, prompt, strlen(prompt) + 1);
 	nb_read = _getline(&line, &n, STDIN_FILENO);
@@ -83,9 +105,8 @@ ssize_t process_command(char *command[])
 		line[strlen(line) - 1] = '\0';
 		strcpy(line, line + 1);
 	}
-	command[0] = strdup(line);
 
-	return (nb_read);
+	return (parse_commands(line, commands));
 }
 /**
  * main - Entry point.
@@ -99,15 +120,16 @@ int main(int argc __attribute__((unused)),
 char *argv[] __attribute__((unused)),
 char *envp[] __attribute__((unused)))
 {
-	char *cmds[] = {NULL, NULL};
+	char **cmds = NULL;
 	int status, n;
 	pid_t cpid, w;
 	struct stat st;
 
 	while (TRUE)
 	{
-		process_command(cmds);
-		if (cmds[0] != NULL || strlen(cmds[0]) != 0)
+		cmds = NULL;
+		n = process_command(&cmds);
+		if (n > 0 && cmds[0] != NULL || strlen(cmds[0]) != 0)
 		{
 			n = stat(cmds[0], &st);
 			if (n == 0)
