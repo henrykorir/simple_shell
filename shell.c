@@ -77,7 +77,6 @@ int parse_commands(char *line, char ***cmds)
 	token = strtok(line, " ");
 	while (token != NULL)
 	{
-		puts(token);
 		*cmds = realloc(*cmds, (i + 2) * sizeof(char *));
 		(*cmds)[i] = strdup(token);
 		token = strtok(NULL, " ");
