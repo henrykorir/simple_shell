@@ -91,7 +91,7 @@ int parse_commands(char *line, char ***cmds)
  * @commands: commands
  * Return: number of commands
  */
-ssize_t process_command(char ***commands)
+int process_command(char ***commands)
 {
 	char *line = NULL, *prompt = "#cisfun$ ";
 	size_t n = 0;
@@ -100,6 +100,11 @@ ssize_t process_command(char ***commands)
 	if (isatty(STDIN_FILENO) == 1)
 		write(STDOUT_FILENO, prompt, strlen(prompt) + 1);
 	nb_read = _getline(&line, &n, STDIN_FILENO);
+	if (nb_read < 0)
+	{
+		perror("_getline");
+		return (0);
+	}
 	if (line[0] == '"' && line[strlen(line) - 1] == '"')
 	{
 		line[strlen(line) - 1] = '\0';
@@ -129,7 +134,7 @@ char *envp[] __attribute__((unused)))
 	{
 		cmds = NULL;
 		n = process_command(&cmds);
-		if (n > 0 && cmds[0] != NULL || strlen(cmds[0]) != 0)
+		if (n > 0 && (cmds[0] != NULL || strlen(cmds[0]) != 0))
 		{
 			n = stat(cmds[0], &st);
 			if (n == 0)
