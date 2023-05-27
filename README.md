@@ -1,1 +1,3 @@
-Group Project on Simple Shel - 2 Contributors
+# A Simple Shell
+## Description
+This is the skelleton for the shell.
